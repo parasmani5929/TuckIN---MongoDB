@@ -7,7 +7,7 @@ if (!isset($_GET['order_id']) || !isset($_GET['amount'])) {
 // ✅ Order details
 $order_id = $_GET['order_id'];
 $amount = $_GET['amount'];
-$upi_id = "9470446751@ptyes"; 
+$upi_id = "9xxxxxxxx@ptyes"; 
 $payee_name = "Tuckin"; 
 
 // ✅ UPI Payment URL
