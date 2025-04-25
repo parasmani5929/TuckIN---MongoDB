@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'db_connection.php';  // Include MongoDB connection
+include 'db_connection.php';  // include MongoDB connection
 
 // ✅ Ensure admin is logged in
 if (!isset($_SESSION['admin_id'])) {
