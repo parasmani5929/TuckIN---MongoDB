@@ -43,20 +43,25 @@ function loadEnvFile(string $envPath): void
     }
 }
 
+function getEnvValue(string $key)
+{
+    return $_ENV[$key] ?? $_SERVER[$key] ?? getenv($key);
+}
+
 try {
     loadEnvFile(__DIR__ . '/.env');
 
     // Fallback to local MongoDB for local development when env vars are not exported.
-    $mongoUri = getenv('MONGODB_URI') ?: 'mongodb://127.0.0.1:27017';
+    $mongoUri = getEnvValue('MONGODB_URI') ?: 'mongodb://127.0.0.1:27017';
 
-    $mongoDbName = getenv('MONGODB_DB') ?: 'food_ordering';
+    $mongoDbName = getEnvValue('MONGODB_DB') ?: 'food_ordering';
 
-    $client = new Client($mongoUri, [], ['serverSelectionTimeoutMS' => 3000]);
+    $client = new Client($mongoUri, [], ['serverSelectionTimeoutMS' => 5000]);
     $db = $client->selectDatabase($mongoDbName);
 } catch (Throwable $e) {
     // Log detailed error server-side, but don't expose secrets in responses
-    error_log('MongoDB connection error: ' . $e->getMessage());
-    echo 'Database connection failed. Ensure MongoDB is running and .env has valid MONGODB_URI and MONGODB_DB values.';
+    error_log('MongoDB connection error: ' . $e->getMessage() . ' | Trace: ' . $e->getTraceAsString());
+    echo 'Database connection failed. Check server logs for error details.';
     exit;
 }
 ?>
