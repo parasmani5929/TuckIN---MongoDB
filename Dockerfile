@@ -1,6 +1,6 @@
 FROM php:8.3-cli
 
-RUN apt-get update \
+RUN apt-get update \ 
     && apt-get install -y --no-install-recommends \
         git unzip libzip-dev libssl-dev libcurl4-openssl-dev ca-certificates \
     && docker-php-ext-install zip \
