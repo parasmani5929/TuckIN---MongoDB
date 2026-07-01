@@ -13,7 +13,7 @@ if (!isset($_SESSION['user_id'])) {
 
 // ✅ Ensure cart is not empty
 if (!isset($_SESSION["cart"]) || empty($_SESSION["cart"])) {
-    die("🛒 Your cart is empty. <a href='index.php'>Go back to menu</a>");
+    die("🛒 Your cart is empty. <a href='index.php'>Go back to menu</a>"); 
 }
 
 // ✅ Fetch user's email from MongoDB
